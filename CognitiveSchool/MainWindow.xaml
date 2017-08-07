@@ -1,0 +1,112 @@
+﻿<Window x:Class="CognitiveSchool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="clr-namespace:WebEye.Controls.Wpf;assembly=WebEye.Controls.Wpf.WebCameraControl"
+        xmlns:local="clr-namespace:CognitiveSchool"
+        mc:Ignorable="d"
+        Title="CognitiveSchool" Height="350" Width="590">
+    <Window.Resources>
+        <Style TargetType="Canvas" x:Key="Header">
+            <Setter Property="Background" Value="#11b398"/>
+        </Style>
+        <Style TargetType="Canvas" x:Key="Menu">
+            <Setter Property="Background" Value="LightGray"/>
+        </Style>
+        <Style TargetType="Button" x:Key="Menubutton">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="MediaElement" x:Key="VideoStyle">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="LoadedBehavior" Value="Manual"/>
+            <Setter Property="MaxHeight" Value="320"/>
+            <Setter Property="MaxWidth" Value="480"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+       <Grid.ColumnDefinitions>
+           <ColumnDefinition Width="*"/>
+           <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+           <RowDefinition Height="*"/>
+           <RowDefinition Height="5*"/>
+           <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Canvas Grid.RowSpan="1" Grid.ColumnSpan="2" Style="{StaticResource Header}"/>
+        <Canvas Grid.Row="1" Grid.RowSpan="2" Grid.Column="0"  Style="{StaticResource Menu}"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="0" FontSize="10">Ver 0.1.3</TextBlock>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" FontFamily="Microsoft JhengHei Light" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 5, 0, 0" TextWrapping="Wrap" >Cognitive School</TextBlock>
+        
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Button Style="{StaticResource Menubutton}" x:Name="Emotion" Content="Emotion" Click="Emotion_OnClick"/>
+            <Button Style="{StaticResource Menubutton}" x:Name="Video" Content="Video" Click="Video_OnClick"/>
+            <StackPanel x:Name="CameraMenu" Margin="0, 20, 0, 0" Visibility="Hidden">
+                <Button x:Name="Start" Content="Start" IsEnabled="False" Click="OnStartButtonClick"/>
+                <Button x:Name="Stop" Content="Stop" IsEnabled="{Binding Path=IsCapturing, ElementName=webCameraControl}" Click="OnStopButtonClick"/>
+                
+                <ComboBox x:Name="ComboBox" DisplayMemberPath="Name" SelectionChanged="ComboBox_OnSelectionChanged"/>
+            </StackPanel>
+        </StackPanel>
+        <wpf:WebCameraControl x:Name="Preview" Grid.Row="1" Grid.Column="1" Margin="10" Visibility="Hidden"/>
+        <StackPanel x:Name="EmotionTable" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="3" Visibility="Hidden">
+            <StackPanel Margin="5, 0, 5, 2">
+                <TextBlock Text="{Binding ElementName=Anger, Path=Name}" FontSize="15"/>
+                <ProgressBar x:Name="Anger" Height="15" Width="40" Minimum="0" Maximum="1"/>
+            </StackPanel>
+            <StackPanel Margin="5, 0, 5, 2">
+                <TextBlock Text="{Binding ElementName=Contempt, Path=Name}" FontSize="15"/>
+                <ProgressBar x:Name="Contempt" Height="15" Width="40" Minimum="0" Maximum="1"/>
+            </StackPanel>
+            <StackPanel Margin="2, 0, 2, 2">
+                <TextBlock Text="{Binding ElementName=Disgust, Path=Name}" FontSize="15"/>
+                <ProgressBar x:Name="Disgust" Height="15" Width="40" Minimum="0" Maximum="1"/>
+            </StackPanel>
+            <StackPanel Margin="5, 0, 5, 2">
+                <TextBlock Text="{Binding ElementName=Fear, Path=Name}" FontSize="15"/>
+                <ProgressBar x:Name="Fear" Height="15" Width="40" Minimum="0" Maximum="1"/>
+            </StackPanel>
+            <StackPanel Margin="5, 0, 5, 2">
+                <TextBlock Text="{Binding ElementName=Happiness, Path=Name}" FontSize="15"/>
+                <ProgressBar x:Name="Happiness" Height="15" Width="40" Minimum="0" Maximum="1"/>
+            </StackPanel>
+
+            <StackPanel Margin="5, 0, 5, 2">
+                <TextBlock Text="{Binding ElementName=Neutral, Path=Name}" FontSize="15"/>
+                <ProgressBar x:Name="Neutral" Height="15" Width="40" Minimum="0" Maximum="1"/>
+            </StackPanel>
+            <StackPanel Margin="5, 0, 5, 2">
+                <TextBlock Text="{Binding ElementName=Sadness, Path=Name}" FontSize="15"/>
+                <ProgressBar x:Name="Sadness" Height="15" Width="40" Minimum="0" Maximum="1"/>
+            </StackPanel>
+            <StackPanel Margin="5, 0, 5, 2">
+                <TextBlock Text="{Binding ElementName=Surprise, Path=Name}" FontSize="15"/>
+                <ProgressBar x:Name="Surprise" Height="15" Width="40" Minimum="0" Maximum="1"/>
+            </StackPanel>
+        </StackPanel>
+        <Grid x:Name="VideoStack" Grid.Row="1" Grid.Column="1" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <MediaElement Grid.Column="0" x:Name="VidOrig" Style="{StaticResource VideoStyle}" />
+            <MediaElement Grid.Column="1" x:Name="VidCog" Style="{StaticResource VideoStyle}" />
+        </Grid>
+        
+        <StackPanel Orientation="Horizontal" x:Name="VideoControls" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Visibility="Hidden">
+            <Button x:Name="Browse"  Content="Browse" Margin="5" Height="20" Width="50" Click="Browse_OnClick"/>
+            <Button x:Name="StartVideo" Content="Play" Margin="5" Height="20" Width="50" Click="StartVideo_OnClick" IsEnabled="False"/>
+            <Button x:Name="StopVideo" Content="Stop" Margin="5" Height="20" Width="50" Click="StopVideo_OnClick" IsEnabled="False"/>
+            <Button x:Name="Save" Content="Save" Margin="5" Height="20" Width="50" Click="Save_OnClick" IsEnabled="False"/>
+        </StackPanel>
+        <ProgressBar x:Name="Bar" Grid.Row="1" Grid.Column="1" Margin="100" Height="10" MaxWidth="300" IsIndeterminate="True" Visibility="Hidden"/>
+
+    </Grid>
+</Window>
