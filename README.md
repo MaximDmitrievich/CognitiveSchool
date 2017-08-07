@@ -1,6 +1,6 @@
-# CognititveSchool
+# CognitiveSchool
 Microsoft Student Partner.
-WPF Application which demonstrates working of Cognititve services. 
+WPF Application which demonstrates working of Cognitive services. 
 
 In this application you can touch Emotion API and Video API.
 
