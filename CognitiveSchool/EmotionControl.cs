@@ -13,7 +13,7 @@ namespace CognitiveSchool
 
         private bool _isEmotion;
 
-        private readonly string _emotionAPISubscriptionKey = "c6cea2a358f24622b4e6002be5ac7f9d";
+        private readonly string _emotionAPISubscriptionKey = "";
 
         public Emotion[] Emotions
         {
