@@ -1,17 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
-using Microsoft.ProjectOxford.Emotion;
 using WebEye.Controls.Wpf;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Threading;
-using Microsoft.ProjectOxford.Common.Contract;
-using Microsoft.ProjectOxford.Video;
-using Microsoft.ProjectOxford.Video.Contract;
 
 namespace CognitiveSchool
 {
@@ -60,7 +54,7 @@ namespace CognitiveSchool
                 Stream fileStream = File.OpenRead(".\\file.jpg");
 
                 await EmotionControlObj.StartRecognize(fileStream);
-                
+                fileStream.Close();
                 if (EmotionControlObj.IsEmotion)
                 {
                     Anger.Value = EmotionControlObj.Emotions[0].Scores.Anger;

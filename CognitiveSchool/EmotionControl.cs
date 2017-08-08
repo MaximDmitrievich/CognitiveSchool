@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using Microsoft.ProjectOxford.Common.Contract;
 using Microsoft.ProjectOxford.Emotion;
 
@@ -18,7 +13,7 @@ namespace CognitiveSchool
 
         private bool _isEmotion;
 
-        private readonly string _emotionAPISubscriptionKey = "";
+        private readonly string _emotionAPISubscriptionKey = "c6cea2a358f24622b4e6002be5ac7f9d";
 
         public Emotion[] Emotions
         {

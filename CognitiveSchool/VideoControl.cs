@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Microsoft.ProjectOxford.Video;
@@ -20,7 +17,7 @@ namespace CognitiveSchool
         private Uri _originalUri;
         private Uri _cognitiveUri;
 
-        private readonly string _videoAPISubscriptionKey = "";
+        private readonly string _videoAPISubscriptionKey = "7c07f154a2764e298ea39ad248aaf30e";
 
         private static readonly TimeSpan _waitTime = TimeSpan.FromSeconds(20);
 
